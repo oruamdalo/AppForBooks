@@ -488,7 +488,8 @@ public class IntroSlider extends AppCompatActivity{
                     @Override
                     public void getResults(ArrayList result) {
                         classroomList = new ArrayList<>(result);
-                        Log.d("CLASSI: ",result.toString());
+//                        Log.d("CLASSI: ",result.toString());
+
                         GridView gridView = (GridView)findViewById(R.id.classrooms_gridview);
                         classroomAdapter = new ClassroomAdapter(IntroSlider.this, classroomList);
                         gridView.setAdapter(classroomAdapter);

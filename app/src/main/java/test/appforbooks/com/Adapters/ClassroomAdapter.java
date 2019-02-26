@@ -2,6 +2,7 @@ package test.appforbooks.com.Adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.textservice.TextInfo;
@@ -38,10 +39,31 @@ public class ClassroomAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView view = new TextView(c);
-        view.setText(classRoomList.get(position).getNumber()
-                +classRoomList.get(position).getLetter()
-                +classRoomList.get(position).getDesc());
+        LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View view;
+        if (convertView == null) {
+
+            view = new View(c);
+            view = inflater.inflate(R.layout.grid_view_item, null);
+            TextView className = view.findViewById(R.id.class_name);
+            TextView classAddress = view.findViewById(R.id.class_address);
+            className.setText(classRoomList.get(position).getNumber()+classRoomList.get(position).getLetter());
+            String text = classRoomList.get(position).getDesc();
+            int index;
+            if(text.indexOf(',')!=-1){
+                index = text.indexOf(',');
+            }else if(text.indexOf(' ') != -1){
+                index = text.indexOf(' ');
+            }else{
+                index = 0;
+            }
+            String classAddressText = text.substring(0, index);
+            classAddress.setText(classAddressText);
+        } else {
+            view = (View) convertView;
+        }
+
         return view;
     }
 }

@@ -17,13 +17,18 @@
     
     <GridView
         android:id="@+id/classrooms_gridview"
+        android:layout_below="@id/slide_title3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:columnWidth="100dp"
         android:numColumns="auto_fit"
-        android:verticalSpacing="24dp"
+        android:verticalSpacing="30dp"
         android:horizontalSpacing="10dp"
-        android:stretchMode="spacingWidthUniform"/>
+        android:stretchMode="columnWidth"
+        android:background="@color/dot_dark_screen3"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="50dp"/>
 
 </RelativeLayout>

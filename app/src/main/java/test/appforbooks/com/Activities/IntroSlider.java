@@ -534,7 +534,8 @@ public class IntroSlider extends AppCompatActivity{
         for(String item : provinces){
             regionList.add(item);
         }
-
-
     }
 }
+
+//TODO: onCLickListener for grid item
+//TODO: final intro slide for recap and start main activity

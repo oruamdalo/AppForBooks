@@ -17,9 +17,11 @@ import test.appforbooks.com.SchoolUtils.ClassRoom;
 public class ClassroomAdapter extends BaseAdapter {
     ArrayList<ClassRoom> classRoomList;
     Context c;
+    private int classIndex;
     public ClassroomAdapter(Context c, ArrayList<ClassRoom> classRoomList){
         this.classRoomList = classRoomList;
         this.c = c;
+        this.classIndex = 0;
     }
 
     @Override
@@ -41,29 +43,37 @@ public class ClassroomAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view;
+        ClassViewHolder viewHolder;
         if (convertView == null) {
+//            classIndex++;
+            viewHolder = new ClassViewHolder();
+            convertView = inflater.inflate(R.layout.grid_view_item, null);
+            viewHolder.className = convertView.findViewById(R.id.class_name);
+            viewHolder.classAddress = convertView.findViewById(R.id.class_address);
 
-            view = new View(c);
-            view = inflater.inflate(R.layout.grid_view_item, null);
-            TextView className = view.findViewById(R.id.class_name);
-            TextView classAddress = view.findViewById(R.id.class_address);
-            className.setText(classRoomList.get(position).getNumber()+classRoomList.get(position).getLetter());
-            String text = classRoomList.get(position).getDesc();
-            int index;
-            if(text.indexOf(',')!=-1){
-                index = text.indexOf(',');
-            }else if(text.indexOf(' ') != -1){
-                index = text.indexOf(' ');
-            }else{
-                index = 0;
-            }
-            String classAddressText = text.substring(0, index);
-            classAddress.setText(classAddressText);
+            convertView.setTag(viewHolder);
         } else {
-            view = (View) convertView;
+            viewHolder = (ClassViewHolder) convertView.getTag();
         }
 
-        return view;
+        viewHolder.className.setText(classRoomList.get(position).getNumber()+classRoomList.get(position).getLetter());
+        String text = classRoomList.get(position).getDesc();
+        int index;
+        if(text.indexOf(',')!=-1){
+            index = text.indexOf(',');
+        }else if(text.indexOf(' ') != -1){
+            index = text.indexOf(' ');
+        }else{
+            index = text.length()-1;
+        }
+        String classAddressText = text.substring(0, index);
+        viewHolder.classAddress.setText(classAddressText);
+
+        return convertView;
+    }
+
+    public static class ClassViewHolder {
+        public TextView className;
+        public TextView classAddress;
     }
 }

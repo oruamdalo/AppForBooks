@@ -92,6 +92,7 @@ public class IntroSlider extends AppCompatActivity{
         provinceKeys = new ArrayList<>();
         schoolList = new ArrayList<>();
         classroomList = new ArrayList<>();
+        fullSchoolList = new ArrayList<>();
         initList();
 
         // Checking for first time launch - before calling setContentView()
@@ -354,6 +355,8 @@ public class IntroSlider extends AppCompatActivity{
                 provinceList.clear();
                 municList.clear();
                 schoolList.clear();
+                fullSchoolList.clear();
+
                 ((Button)findViewById(R.id.city_button)).setText(getString(R.string.hintCity));
                 ((Button)findViewById(R.id.province_button)).setText(getString(R.string.hintProvince));
                 ((Button)findViewById(R.id.school_button)).setText(getString(R.string.hintSchool));
@@ -399,6 +402,7 @@ public class IntroSlider extends AppCompatActivity{
 
 
     private void initProvince(){
+        municList.clear();
         final SpinnerDialog provinceSpinner = new SpinnerDialog(IntroSlider.this, provinceList, "Seleziona la provincia");
         provinceSpinner.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
@@ -432,6 +436,7 @@ public class IntroSlider extends AppCompatActivity{
     }
 
     private void initMunic(){
+        fullSchoolList.clear();
         schoolList.clear();
         municSpinner = new SpinnerDialog(IntroSlider.this, municList, "Seleziona il comune");
         municSpinner.bindOnSpinerListener(new OnSpinerItemClick() {
@@ -489,6 +494,9 @@ public class IntroSlider extends AppCompatActivity{
                     public void getResults(ArrayList result) {
                         classroomList = new ArrayList<>(result);
 //                        Log.d("CLASSI: ",result.toString());
+                        for(ClassRoom s : classroomList){
+                            Log.d("CLASSE: ",s.getNumber()+s.getLetter());
+                        }
 
                         GridView gridView = (GridView)findViewById(R.id.classrooms_gridview);
                         classroomAdapter = new ClassroomAdapter(IntroSlider.this, classroomList);

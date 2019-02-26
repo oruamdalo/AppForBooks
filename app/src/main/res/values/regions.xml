@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="region_name">
+        <item>ABRUZZO</item>
+        <item>VALLE DAOSTA</item>
+        <item>BASILICATA</item>
+        <item>CALABRIA</item>
+        <item>CAMPANIA</item>
+        <item>EMILIA ROMAGNA</item>
+        <item>FRIULI-VENEZIA GIULIA</item>
+        <item>LAZIO</item>
+        <item>LIGURIA</item>
+        <item>LOMBARDIA</item>
+        <item>MARCHE</item>
+        <item>MOLISE</item>
+        <item>PIEMONTE</item>
+        <item>PUGLIA</item>
+        <item>SARDEGNA</item>
+        <item>SICILIA</item>
+        <item>TOSCANA</item>
+        <item>TRENTINO-ALTO ADIGE</item>
+        <item>UMBRIA</item>
+        <item>VENETO</item>
+    </string-array>
+</resources>

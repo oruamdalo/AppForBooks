@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/bg_screen1">
+
+    <TextView
+        android:id="@+id/slide_title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/slideTitle1"
+        android:textSize="40sp"
+        android:textColor="#fff"
+        android:fontFamily="@font/ps_bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/firstname_input"
+        android:layout_below="@id/slide_title1"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:hint="@string/firstNameInput"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#fff"
+        android:textColorHint="#fff"
+        android:textColor="#fff"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/lastname_input"
+        android:layout_below="@id/firstname_input"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:hint="@string/lastNameInput"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#fff"
+        android:textColorHint="#fff"
+        android:textColor="#fff"
+        android:inputType="text"/>
+
+    <Spinner
+        android:layout_below="@id/lastname_input"
+        android:id="@+id/schoolgrade_spinner"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#fff"
+        android:foregroundTint="#fff"/>
+
+</RelativeLayout>

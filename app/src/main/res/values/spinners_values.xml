@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="school_grades">
+        <item>Scuola primaria</item>
+        <item>Scuola secondaria I</item>
+        <item>Scuola secondaria II</item>
+    </string-array>
+</resources>

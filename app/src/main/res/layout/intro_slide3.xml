@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/bg_screen3">
+
+    <TextView
+        android:id="@+id/slide_title3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/slideTitle3"
+        android:textSize="40sp"
+        android:textColor="@color/textSlideColor"
+        android:fontFamily="@font/ps_bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"/>
+    
+    <GridView
+        android:id="@+id/classrooms_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="24dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="spacingWidthUniform"/>
+
+</RelativeLayout>

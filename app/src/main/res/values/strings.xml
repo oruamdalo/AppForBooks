@@ -1,0 +1,40 @@
+<resources>
+    <!--APP TITLE-->
+    <string name="app_name">FindMyBooks</string>
+
+    <!--SLIDE TITLES-->
+    <string name="slideTitle1">Imposta le \ncredenziali</string>
+    <string name="slideTitle2">Seleziona \n la tua scuola</string>
+    <string name="slideTitle3">Seleziona \n la tua classe</string>
+    <string name="slideTitle4">Finito!</string>
+
+    <!--SLIDE CONTENTS-->
+                            <!--1-->
+    <string name="firstNameInput">Inserisci il tuo nome</string>
+    <string name="lastNameInput">Inserisci il tuo cognome</string>
+                            <!--2-->
+    <string name="regionText">Scegli la tua regione</string>
+    <string name="cityText">Scegli la tua citta</string>
+    <string name="provinceText">Scegli la tua provincia</string>
+    <string name="schoolText">Scegli la tua scuola</string>
+    <string name="hintRegion">Regione...</string>
+    <string name="hintCity">Citta...</string>
+    <string name="hintProvince">Provincia...</string>
+    <string name="hintSchool">Scuola...</string>
+
+                            <!--3-->
+
+
+    <!--BUTTONS TEXT-->
+    <string name="nextBtnText">Avanti</string>
+    <string name="prevbtnText">Indietro</string>
+    <string name="skipBtnText">Salta</string>
+    <string name="confirmBtn">Conferma</string>
+
+    <!--MENU TEXT-->
+    <string name="settingsText">Impostazioni</string>
+    <string name="accountText">Profilo</string>
+
+
+
+</resources>

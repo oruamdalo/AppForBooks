@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--SLIDES-->
+    <dimen name="textSize">40sp</dimen>
+    <dimen name="textRegularSize">20sp</dimen>
+    <dimen name="spinnerWidth">150dp</dimen>
+    <dimen name="spinnerHeight">60dp</dimen>
+    <dimen name="textStartMargin">20dp</dimen>
+    <dimen name="textTopMargin">40dp</dimen>
+    <dimen name="spinnerTopMargin">20dp</dimen>
+    <string name="spinnerDialogMode">dialog</string>
+
+    
+</resources>

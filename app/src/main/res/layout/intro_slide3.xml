@@ -11,9 +11,22 @@
         android:textSize="40sp"
         android:textColor="@color/textSlideColor"
         android:fontFamily="@font/ps_bold"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
         android:gravity="center"/>
+    <TextView
+        android:id="@+id/chosen_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="5Ai"
+        android:textSize="40sp"
+        android:textColor="@color/textSlideColor"
+        android:fontFamily="@font/ps_bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_margin="40dp"/>
     
     <GridView
         android:id="@+id/classrooms_gridview"

@@ -64,7 +64,7 @@ public class ClassroomAdapter extends BaseAdapter {
         }else if(text.indexOf(' ') != -1){
             index = text.indexOf(' ');
         }else{
-            index = text.length()-1;
+            index = text.length();
         }
         String classAddressText = text.substring(0, index);
         viewHolder.classAddress.setText(classAddressText);

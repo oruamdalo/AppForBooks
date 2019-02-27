@@ -11,12 +11,12 @@
         android:text="5Ai"
         android:fontFamily="@font/ps_bold"
         android:textColor="@color/dot_light_screen3"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
         android:padding="20dp"
         android:textAlignment="center"
         android:background="#fff"/>
+    <!--android:layout_marginRight="20dp"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_marginTop="20dp"-->
 
     <TextView
         android:id="@+id/class_address"

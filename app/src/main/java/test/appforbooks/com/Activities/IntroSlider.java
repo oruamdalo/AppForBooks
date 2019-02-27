@@ -501,6 +501,18 @@ public class IntroSlider extends AppCompatActivity{
                         GridView gridView = (GridView)findViewById(R.id.classrooms_gridview);
                         classroomAdapter = new ClassroomAdapter(IntroSlider.this, classroomList);
                         gridView.setAdapter(classroomAdapter);
+                        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Toast.makeText(IntroSlider.this, "" + position, Toast.LENGTH_SHORT).show();
+                                if(view != null) {
+                                    String classNameChosen = classroomList.get(position).getNumber()
+                                            + classroomList.get(position).getLetter()
+                                            + classroomList.get(position).getDesc().toLowerCase().charAt(0);
+                                    ((TextView) findViewById(R.id.chosen_class)).setText(classNameChosen);
+                                }
+                            }
+                        });
                     }
 
                     @Override

@@ -305,7 +305,6 @@ public class IntroSlider extends AppCompatActivity{
                     initSlideThree();
                     break;
                 case 3:
-                    initSlideFour();
                     break;
                 default:
                     break;
@@ -525,7 +524,7 @@ public class IntroSlider extends AppCompatActivity{
     }
 
     private void initSlideThree(){
-        //SLIDE 3 GRIDVIEW ADAPTER
+
 
     }
 

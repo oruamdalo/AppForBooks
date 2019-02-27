@@ -72,7 +72,7 @@ public class IntroSlider extends AppCompatActivity{
     ArrayList<ClassRoom> classroomList;
     SpinnerDialog regionSpinner, provinceSpinner, municSpinner, schoolSpinner;
     String regionCode, municCode, provinceCode;
-    String schoolGrade, schoolCode = null;
+    String schoolGrade, schoolCode = null, classCode = null;
     SchoolManager schoolManager;
     SchoolPicker schoolPicker;
     ClassroomAdapter classroomAdapter;
@@ -305,6 +305,7 @@ public class IntroSlider extends AppCompatActivity{
                     initSlideThree();
                     break;
                 case 3:
+                    initSlideFour();
                     break;
                 default:
                     break;
@@ -352,10 +353,6 @@ public class IntroSlider extends AppCompatActivity{
         regionSpinner.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
             public void onClick(String item, int position) {
-                provinceList.clear();
-                municList.clear();
-                schoolList.clear();
-                fullSchoolList.clear();
 
                 ((Button)findViewById(R.id.city_button)).setText(getString(R.string.hintCity));
                 ((Button)findViewById(R.id.province_button)).setText(getString(R.string.hintProvince));
@@ -377,6 +374,8 @@ public class IntroSlider extends AppCompatActivity{
                     @Override
                     public void getResults(HashMap result) {
                         HashMap<String, String> res = new HashMap<>(result);
+                        provinceList.clear();
+                        provinceKeys.clear();
                         for(String key : res.keySet()){
                             provinceList.add(res.get(key));
                             provinceKeys.add(key);
@@ -402,13 +401,11 @@ public class IntroSlider extends AppCompatActivity{
 
 
     private void initProvince(){
-        municList.clear();
-        final SpinnerDialog provinceSpinner = new SpinnerDialog(IntroSlider.this, provinceList, "Seleziona la provincia");
+        final SpinnerDialog provinceSpinner = new SpinnerDialog(IntroSlider.this, provinceList, "Seleziona la citta");
         provinceSpinner.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
             public void onClick(String item, int position) {
                 ((Button)findViewById(R.id.city_button)).setText(item);
-
 
                 schoolPicker.getMunicipality(provinceKeys.get(position), IntroSlider.this, new SchoolManagerInterface() {
                     @Override
@@ -419,6 +416,7 @@ public class IntroSlider extends AppCompatActivity{
                     @Override
                     public void getResults(HashMap result) {
                         HashMap<String, String> res = new HashMap<>(result);
+                        municList.clear();
                         for(String key : res.keySet()){
                             municList.add(res.get(key));
                         }
@@ -436,9 +434,8 @@ public class IntroSlider extends AppCompatActivity{
     }
 
     private void initMunic(){
-        fullSchoolList.clear();
-        schoolList.clear();
-        municSpinner = new SpinnerDialog(IntroSlider.this, municList, "Seleziona il comune");
+        final SpinnerDialog municSpinner = new SpinnerDialog(IntroSlider.this, municList, "Seleziona la provincia" +
+                "");
         municSpinner.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
             public void onClick(String item, int position) {
@@ -447,8 +444,8 @@ public class IntroSlider extends AppCompatActivity{
                 schoolPicker.getSchool(item, schoolGrade, IntroSlider.this, new SchoolManagerInterface() {
                     @Override
                     public void getResults(ArrayList result) {
-                        //TODO: put in schoolList the res values
                         ArrayList<School> res = new ArrayList<School>(result);
+                        schoolList.clear();
                         fullSchoolList = new ArrayList<School>(result);
                         for(int i=0;i<res.size();i++){
                             String schoolName = res.get(i).getName()
@@ -474,24 +471,19 @@ public class IntroSlider extends AppCompatActivity{
     }
 
     private void initSchool(){
-        schoolSpinner = new SpinnerDialog(IntroSlider.this, schoolList, "Seleziona la scuola");
+        final SpinnerDialog schoolSpinner = new SpinnerDialog(IntroSlider.this, schoolList, "Seleziona la scuola");
         schoolSpinner.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
             public void onClick(String item, int position) {
                 ((Button)findViewById(R.id.school_button)).setText(item);
 
-                //TODO: make this work correctly
-//                Intent i = getIntent();
-//                Bundle extras = i.getExtras();
-//                String data = extras.getString("schoolGrade");
-//                Log.d("SchoolGrade: ",Integer.toString(data.length()));
-//                Toast.makeText(CityChooser.this,"SchoolGrade: "+data,Toast.LENGTH_SHORT).show();
                 Toast.makeText(IntroSlider.this, fullSchoolList.get(position).getCode(), Toast.LENGTH_SHORT).show();
                 schoolManager = new SchoolManager(fullSchoolList.get(position).getCode(), IntroSlider.this);
                 schoolCode = fullSchoolList.get(position).getCode();
                 schoolManager.getClasses(IntroSlider.this, new SchoolManagerInterface() {
                     @Override
                     public void getResults(ArrayList result) {
+                        classroomList.clear();
                         classroomList = new ArrayList<>(result);
 //                        Log.d("CLASSI: ",result.toString());
                         for(ClassRoom s : classroomList){
@@ -511,6 +503,7 @@ public class IntroSlider extends AppCompatActivity{
                                             + classroomList.get(position).getDesc().toLowerCase().charAt(0);
                                     ((TextView) findViewById(R.id.chosen_class)).setText(classNameChosen);
                                 }
+                                classCode = classroomList.get(position).getId();
                             }
                         });
                     }
@@ -549,5 +542,7 @@ public class IntroSlider extends AppCompatActivity{
     }
 }
 
-//TODO: onCLickListener for grid item
 //TODO: final intro slide for recap and start main activity
+//TODO: shared pref to save schoolCode, classCode, name, surname etc
+//TODO: fix slide2 spinner data loading
+//TODO: add circle animation while loading slide2 spinner data

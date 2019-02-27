@@ -22,5 +22,9 @@ public class ClassRoom {
     public String getDesc() {
         return desc;
     }
+
+    public String getId() {
+        return id;
+    }
 }
 

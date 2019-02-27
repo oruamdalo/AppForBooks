@@ -3,4 +3,57 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/bg_screen4">
 
+    <TextView
+        android:id="@+id/slide_title4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/slideTitle4"
+        android:textSize="40sp"
+        android:textColor="#fff"
+        android:fontFamily="@font/ps_bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/fname_text"
+        android:layout_below="@id/slide_title4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fnameText"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:fontFamily="@font/ps_bold"
+        android:layout_margin="30dp" />
+    <TextView
+        android:id="@+id/lname_text"
+        android:layout_below="@id/fname_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lnameText"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:fontFamily="@font/ps_bold"
+        android:layout_margin="30dp" />
+    <TextView
+        android:id="@+id/school_text_recap"
+        android:layout_below="@id/lname_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/schoolTextRecap"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:fontFamily="@font/ps_bold"
+        android:layout_margin="30dp" />
+
+    <TextView
+        android:id="@+id/class_text_recap"
+        android:layout_below="@id/school_text_recap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/classText"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:fontFamily="@font/ps_bold"
+        android:layout_margin="30dp" />
+
 </RelativeLayout>

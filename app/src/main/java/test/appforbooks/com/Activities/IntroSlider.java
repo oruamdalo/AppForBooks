@@ -52,6 +52,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Random;
 
 public class IntroSlider extends AppCompatActivity{
 
@@ -73,6 +74,7 @@ public class IntroSlider extends AppCompatActivity{
     SpinnerDialog regionSpinner, provinceSpinner, municSpinner, schoolSpinner;
     String regionCode, municCode, provinceCode;
     String schoolGrade, schoolCode = null, classCode = null;
+    String firstName = null, lastName = null;
     SchoolManager schoolManager;
     SchoolPicker schoolPicker;
     ClassroomAdapter classroomAdapter;
@@ -283,6 +285,8 @@ public class IntroSlider extends AppCompatActivity{
 
             switch (position){
                 case 0:
+                    firstName = ((EditText)findViewById(R.id.firstname_input)).getText().toString().toLowerCase();
+                    lastName = ((EditText)findViewById(R.id.lastname_input)).getText().toString().toLowerCase();
                     String[] myResArray = getResources().getStringArray(R.array.school_grades);
                     Spinner slideOneSpinner = setupSpinner(R.id.schoolgrade_spinner, new ArrayList(Arrays.asList(myResArray)));
                     slideOneSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -302,9 +306,9 @@ public class IntroSlider extends AppCompatActivity{
                     initSlideTwo();
                     break;
                 case 2:
-                    initSlideThree();
                     break;
                 case 3:
+                    initSlideFour();
                     break;
                 default:
                     break;
@@ -523,9 +527,15 @@ public class IntroSlider extends AppCompatActivity{
         });
     }
 
-    private void initSlideThree(){
-
-
+    //TODO: fix this method
+    private void initSlideFour(){
+        prefManager.setClassroomCode(classCode);
+        prefManager.setSchoolCode(schoolCode);
+        prefManager.setUserId((firstName + lastName) + new Random(System.currentTimeMillis()).nextInt()); //generate unique ID
+        ((TextView)findViewById(R.id.fname_text)).setText(getString(R.string.fnameText)+" "+firstName);
+        ((TextView)findViewById(R.id.lname_text)).setText(getString(R.string.lnameText)+" "+lastName);
+        ((TextView)findViewById(R.id.school_text_recap)).setText(getString(R.string.schoolTextRecap)+" "+schoolCode);
+        ((TextView)findViewById(R.id.class_text_recap)).setText(getString(R.string.classText)+" "+classCode);
     }
 
     private void initList(){

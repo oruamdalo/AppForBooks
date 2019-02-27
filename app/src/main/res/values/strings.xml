@@ -21,9 +21,13 @@
     <string name="hintCity">Citta...</string>
     <string name="hintProvince">Provincia...</string>
     <string name="hintSchool">Scuola...</string>
-
                             <!--3-->
 
+                            <!--4-->
+    <string name="fnameText">Nome</string>
+    <string name="lnameText">Cognome</string>
+    <string name="schoolTextRecap">Scuola</string>
+    <string name="classText">classe</string>
 
     <!--BUTTONS TEXT-->
     <string name="nextBtnText">Avanti</string>

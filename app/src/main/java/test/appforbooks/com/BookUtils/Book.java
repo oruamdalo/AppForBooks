@@ -107,7 +107,7 @@ public class Book {
 //                    }else if(authorJson instanceof JSONArray){
 //                        Log.d("AUTHOR JSON: ","ARRAY");
 //                        JSONArray array = new JSONArray(authorJson);
-//                        for(int i=0;i<array.length();i++){
+//                         for(int i=0;i<array.length();i++){
 //                            authors += array.get(i).toString();
 //                            if(i < array.length()-1){
 //                                authors += ", ";

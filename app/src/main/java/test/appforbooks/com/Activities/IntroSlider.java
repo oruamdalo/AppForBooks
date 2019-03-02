@@ -73,8 +73,8 @@ public class IntroSlider extends AppCompatActivity{
     ArrayList<ClassRoom> classroomList;
     SpinnerDialog regionSpinner, provinceSpinner, municSpinner, schoolSpinner;
     String regionCode, municCode, provinceCode;
-    String schoolGrade, schoolCode = null, classCode = null;
-    String firstName = null, lastName = null;
+    String schoolGrade, schoolCode, classCode;
+    String firstName, lastName;
     SchoolManager schoolManager;
     SchoolPicker schoolPicker;
     ClassroomAdapter classroomAdapter;
@@ -122,7 +122,7 @@ public class IntroSlider extends AppCompatActivity{
                 R.layout.intro_slide1,
                 R.layout.intro_slide2,
                 R.layout.intro_slide3,
-                R .layout.intro_slide4};
+                R.layout.intro_slide4};
 
         // adding bottom dots
         addBottomDots(0);
@@ -133,6 +133,7 @@ public class IntroSlider extends AppCompatActivity{
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+
 
         btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,14 +156,12 @@ public class IntroSlider extends AppCompatActivity{
                 if (current < layouts.length && checkIfCanScroll(currentPagePosition)) {
                     // move to next screen
                     viewPager.setCurrentItem(current);
-                } else if(current == layouts.length - 1) {
+                } else if(current == layouts.length) {
                     launchHomeScreen();
                 }
+                Log.d("CURRENT: ",""+current);
             }
         });
-
-        //Deactive the page scrolling
-        viewPager.setPagingEnabled(false);
 
         //Not used because of logistic issues
         /*viewPager.setOnTouchListener(new View.OnTouchListener() {
@@ -211,11 +210,19 @@ public class IntroSlider extends AppCompatActivity{
     private boolean checkIfCanScroll(int position){
         switch (position){
             case 0:
-                String firstName = ((EditText)findViewById(R.id.firstname_input)).getText().toString();
-                String lastName = ((EditText)findViewById(R.id.lastname_input)).getText().toString();
-                return (!firstName.isEmpty() && !lastName.isEmpty());
+                String f = ((EditText)findViewById(R.id.firstname_input)).getText().toString();
+                String l = ((EditText)findViewById(R.id.lastname_input)).getText().toString();
+                if((!f.isEmpty() && !l.isEmpty())){
+                    firstName = ((EditText) findViewById(R.id.firstname_input)).getText().toString().toLowerCase();
+                    lastName = ((EditText)findViewById(R.id.lastname_input)).getText().toString().toLowerCase();
+                }
+                return (!f.isEmpty() && !l.isEmpty());
             case 1:
                 return schoolManager != null;
+            case 2:
+                return classCode != null;
+            case 3:
+                break;
             default:
                     break;
         }
@@ -245,7 +252,6 @@ public class IntroSlider extends AppCompatActivity{
 
         @Override
         public void onPageScrolled(int arg0, float arg1, int arg2) {
-
         }
 
         @Override
@@ -253,6 +259,9 @@ public class IntroSlider extends AppCompatActivity{
 //            Toast.makeText(IntroSlider.this, "Sliding: "+(canScroll = checkIfCanScroll(currentPagePosition)), Toast.LENGTH_SHORT).show();
 //            canScroll = checkIfCanScroll(currentPagePosition);
 //            viewPager.setPagingEnabled(canScroll);
+            if(currentPagePosition == 3){
+                initSlideFour();
+            }
         }
     };
 
@@ -283,10 +292,10 @@ public class IntroSlider extends AppCompatActivity{
             View view = layoutInflater.inflate(layouts[position], container, false);
             container.addView(view);
 
+            Log.d("View name" , getResources().getResourceEntryName(layouts[position]));
+
             switch (position){
                 case 0:
-                    firstName = ((EditText)findViewById(R.id.firstname_input)).getText().toString().toLowerCase();
-                    lastName = ((EditText)findViewById(R.id.lastname_input)).getText().toString().toLowerCase();
                     String[] myResArray = getResources().getStringArray(R.array.school_grades);
                     Spinner slideOneSpinner = setupSpinner(R.id.schoolgrade_spinner, new ArrayList(Arrays.asList(myResArray)));
                     slideOneSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -306,9 +315,13 @@ public class IntroSlider extends AppCompatActivity{
                     initSlideTwo();
                     break;
                 case 2:
+
                     break;
                 case 3:
-                    initSlideFour();
+//                    initSlideThree();
+                    break;
+                case 4:
+
                     break;
                 default:
                     break;
@@ -499,14 +512,17 @@ public class IntroSlider extends AppCompatActivity{
                         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Toast.makeText(IntroSlider.this, "" + position, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(IntroSlider.this, "" + position, Toast.LENGTH_SHORT).show();
                                 if(view != null) {
                                     String classNameChosen = classroomList.get(position).getNumber()
                                             + classroomList.get(position).getLetter()
                                             + classroomList.get(position).getDesc().toLowerCase().charAt(0);
                                     ((TextView) findViewById(R.id.chosen_class)).setText(classNameChosen);
+
+                                    classCode = classroomList.get(position).getId();
+                                    Toast.makeText(IntroSlider.this, ""+classCode,Toast.LENGTH_SHORT).show();
+//                                    initSlideFour();
                                 }
-                                classCode = classroomList.get(position).getId();
                             }
                         });
                     }
@@ -527,8 +543,33 @@ public class IntroSlider extends AppCompatActivity{
         });
     }
 
+//    private void initSlideThree(){
+//        GridView gridView = (GridView)findViewById(R.id.classrooms_gridview);
+//        classroomAdapter = new ClassroomAdapter(IntroSlider.this, classroomList);
+//        gridView.setAdapter(classroomAdapter);
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(IntroSlider.this, "" + position, Toast.LENGTH_SHORT).show();
+//                if(view != null) {
+//                    String classNameChosen = classroomList.get(position).getNumber()
+//                            + classroomList.get(position).getLetter()
+//                            + classroomList.get(position).getDesc().toLowerCase().charAt(0);
+//                    ((TextView) findViewById(R.id.chosen_class)).setText(classNameChosen);
+//
+//                    classCode = classroomList.get(position).getId();
+//                }
+//            }
+//        });
+//    }
+
     //TODO: fix this method
     private void initSlideFour(){
+        Log.d("SLIDE: ", "LAST SLIDE");
+        Log.d("Name: ", ""+firstName);
+        Log.d("Surname: ", ""+lastName);
+        Log.d("Schoolcode: ", ""+schoolCode);
+        Log.d("Classcode: ", ""+classCode);
         prefManager.setClassroomCode(classCode);
         prefManager.setSchoolCode(schoolCode);
         prefManager.setUserId((firstName + lastName) + new Random(System.currentTimeMillis()).nextInt()); //generate unique ID

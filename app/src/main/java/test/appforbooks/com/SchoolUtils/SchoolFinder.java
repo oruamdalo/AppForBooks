@@ -28,7 +28,7 @@ public class SchoolFinder {
         this.regionId = regionId;
     }
 
-    public void makeRequest(String REST_URL, Context context, final ResultManager resultManager){
+    public static void makeRequest(String REST_URL, Context context, final ResultManager resultManager){
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = API_URL+REST_URL;
         // Request a string response from the provided URL.
@@ -44,6 +44,7 @@ public class SchoolFinder {
                 Log.e("ERRORE VOLLEY", error.getMessage());
             }
         });
+        queue.add(stringRequest);
     }
 
     public String getRegionId(){

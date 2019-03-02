@@ -1,0 +1,75 @@
+package test.appforbooks.com.Adapters;
+
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import test.appforbooks.com.BookUtils.Book;
+import test.appforbooks.com.R;
+import test.appforbooks.com.SchoolUtils.SchoolManagerInterface;
+import test.appforbooks.com.Utils.VolleyResponse;
+
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
+
+    ArrayList<Book> data;
+
+    public BookAdapter(ArrayList<Book> data){
+        this.data = new ArrayList<>(data);
+    }
+
+    public static class BookViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        public View bookView;
+        public BookViewHolder(View v) {
+            super(v);
+            bookView = v;
+        }
+    }
+
+    @NonNull
+    @Override
+    public BookAdapter.BookViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
+        // create a new view
+        View v = (View) LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.book_item_list, viewGroup, false);
+
+        BookViewHolder vh = new BookViewHolder(v);
+        return vh;
+    }
+
+    public void onBindViewHolder(final BookViewHolder viewHolder, final int i) {
+        data.get(i).getBookInfo(new VolleyResponse() {
+            @Override
+            public void onResponse() {
+                TextView title = viewHolder.bookView.findViewById(R.id.book_title);
+                TextView author = viewHolder.bookView.findViewById(R.id.book_author);
+                TextView price = viewHolder.bookView.findViewById(R.id.book_price);
+                title.setText(data.get(i).getTitle());
+                author.setText(data.get(i).getAuthor());
+                price.setText(data.get(i).getPrice());
+
+                ImageView thumbnail = viewHolder.bookView.findViewById(R.id.book_thumbnail);
+                Picasso.get().load(data.get(i).getImageURL()).into(thumbnail);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return data.size();
+    }
+
+
+}

@@ -45,6 +45,14 @@ public class PrefManager {
         editor.commit();
     }
 
+    public String getSchoolCode(){
+        return pref.getString(SCHOOL_CODE,null);
+    }
+
+    public String getClassroomCode(){
+        return pref.getString(CLASSROOM_CODE,null);
+    }
+
     public boolean isFirstTimeLaunch() {
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }

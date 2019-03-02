@@ -66,7 +66,8 @@ public class SchoolManager {
         queue.add(stringRequest);
     }
 
-    public void getClassBooks(String classId, Context context, final SchoolManagerInterface callback){
+    //Not used anymore
+    /*public void getClassBooks(String classId, Context context, final SchoolManagerInterface callback){
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = "https://www.adozionilibriscolastici.it/v1/libri/"+classId+"/"+schoolCode;
@@ -85,7 +86,7 @@ public class SchoolManager {
                                 String title = book.getString("TITOLO");
                                 String author = book.getString("AUTORI");
                                 String isbn = book.getString("ISBN");
-                                books.add(new Book(title, author, isbn));
+                                books.add(new Book(title, author, isbn)); //to change construct to make it work correctly
                             }
                         }catch (Exception e){
                             Log.e("ERRORE CLASS RESPONSE", "ERRORE");
@@ -102,7 +103,7 @@ public class SchoolManager {
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
-    }
+    }*/
 
     public String getSchoolCode(){
         return schoolCode;

@@ -101,19 +101,26 @@ public class Book {
                     Object authorJson = new JSONTokener(itemAttr.get("Author").toString()).nextValue();
                     Log.d("AUTHOR JSON 1", ""+authorJson);
                     Log.d("AUTHOR JSON 2", ""+ authorJson.getClass());
-//                    if(authorJson instanceof String){
-//                        Log.d("AUTHOR JSON: ","STRING");
-//                        authors = authorJson.toString();
-//                    }else if(authorJson instanceof JSONArray){
-//                        Log.d("AUTHOR JSON: ","ARRAY");
-//                        JSONArray array = new JSONArray(authorJson);
+                    if(authorJson instanceof String){
+                        Log.d("AUTHOR JSON: ","STRING");
+                        authors = authorJson.toString();
+                    }else if(authorJson instanceof JSONArray){
+                        Log.d("AUTHOR JSON: ","ARRAY");
+                        for(int i=0;i<((JSONArray) authorJson).length();i++) {
+                            Log.d("AUTHOR ARRAY (" + i + "): ", ((JSONArray) authorJson).get(i).toString());
+                            authors += ((JSONArray) authorJson).get(i).toString();
+                            if(i < ((JSONArray) authorJson).length() - 1){
+                                authors += ", ";
+                            }
+                        }
+
 //                         for(int i=0;i<array.length();i++){
 //                            authors += array.get(i).toString();
 //                            if(i < array.length()-1){
 //                                authors += ", ";
 //                            }
 //                        }
-//                    }
+                    }
 
                     setAuthor(authors);
 //                    setAuthor("");

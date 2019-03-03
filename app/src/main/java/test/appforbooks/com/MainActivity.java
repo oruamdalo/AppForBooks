@@ -59,13 +59,6 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse() {
                 bAdapter = new BookAdapter(bookList);
                 bList.setAdapter(bAdapter);
-
-                bList.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(MainActivity.this, "hey", Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
         });
 

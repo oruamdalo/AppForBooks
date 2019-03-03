@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import test.appforbooks.com.BookUtils.Book;
 import test.appforbooks.com.R;
 import test.appforbooks.com.SchoolUtils.SchoolManagerInterface;
+import test.appforbooks.com.Utils.PicassoCircleTransformation;
 import test.appforbooks.com.Utils.VolleyResponse;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
@@ -45,8 +47,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         View v = (View) LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.book_item_list, viewGroup, false);
 
-        BookViewHolder vh = new BookViewHolder(v);
-        return vh;
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), ((TextView)v.findViewById(R.id.book_title)).getText().toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        return new BookViewHolder(v);
     }
 
     public void onBindViewHolder(final BookViewHolder viewHolder, final int i) {

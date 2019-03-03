@@ -19,7 +19,7 @@ import test.appforbooks.com.SchoolUtils.SchoolManagerInterface;
 import test.appforbooks.com.Utils.VolleyResponse;
 
 public class Book {
-    private String title, author, isbn;
+    private String title, author, isbn, subject;
 
     private String imageURL, amazonPage, price;
     private Context c;
@@ -60,7 +60,7 @@ public class Book {
 
     public void setTitle(String title) {
         int endIndex = (title.length() < 25) ? title.length() : 25;
-        this.title = capitalizeString(title).substring(0, endIndex);
+        this.title = capitalizeString(title).substring(0, endIndex) + ((endIndex == 25)?"...":"");
     }
 
     public String getAuthor() {
@@ -68,7 +68,15 @@ public class Book {
     }
 
     public void setAuthor(String author) {
-        this.author = capitalizeString(author).replaceAll("-",",");
+        this.author = "di "+capitalizeString(author).replaceAll("-",",");
+    }
+
+    public void setSubject(String subject){
+        this.subject = subject;
+    }
+
+    public String getSubject(){
+        return subject;
     }
 
     public void getBookInfo(final VolleyResponse callback){

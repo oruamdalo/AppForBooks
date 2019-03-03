@@ -10,6 +10,9 @@
     <dimen name="textTopMargin">40dp</dimen>
     <dimen name="spinnerTopMargin">20dp</dimen>
     <string name="spinnerDialogMode">dialog</string>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
-    
+
 </resources>

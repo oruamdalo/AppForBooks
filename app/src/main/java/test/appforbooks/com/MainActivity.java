@@ -82,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
                     for(int i=0;i<resArray.length();i++){
                         JSONObject book = resArray.getJSONObject(i);
                         String isbnCode = book.getString("ISBN");
-                        String authors = book.getString("AUTORI");
                         Book bookObj = new Book(isbnCode, MainActivity.this);
-                        bookObj.setAuthor(authors);
+                        bookObj.setAuthor(book.getString("AUTORI"));
+                        bookObj.setTitle(book.getString("TITOLO"));
                         bookList.add(bookObj);
                     }
                     callback.onResponse();

@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
+    android:layout_marginTop="10dp"
     style="@style/CardView.Light"
     android:background="@drawable/grid_view_item">
     <RelativeLayout
@@ -19,21 +20,28 @@
             android:layout_toEndOf="@id/book_thumbnail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CIAO"/>
+            android:text="Caricando titolo"
+            android:textSize="18sp"
+            android:fontFamily="@font/ps_bold"/>
         <TextView
             android:id="@+id/book_author"
             android:layout_below="@id/book_title"
             android:layout_toEndOf="@id/book_thumbnail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CIAO" />
+            android:text="Caricando autori"
+            android:textSize="14sp"
+            android:fontFamily="@font/roboto_regular"/>
         <TextView
             android:id="@+id/book_price"
-            android:layout_below="@id/book_author"
             android:layout_toEndOf="@id/book_thumbnail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CIAO" />
+            android:text="Caricando prezzo"
+            android:textSize="14sp"
+            android:fontFamily="@font/roboto_bold"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"/>
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

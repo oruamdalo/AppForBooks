@@ -59,7 +59,8 @@ public class Book {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        int endIndex = (title.length() < 25) ? title.length() : 25;
+        this.title = capitalizeString(title).substring(0, endIndex);
     }
 
     public String getAuthor() {
@@ -67,19 +68,7 @@ public class Book {
     }
 
     public void setAuthor(String author) {
-        String res = author;
-        res = res.toLowerCase();
-        res = res.replaceAll("-"," ");
-        String[] words = res.split("\\s+");
-        for(int i=0;i<words.length;i++){
-            words[i] = words[i].substring(0,1).toUpperCase() + words[i].substring(1).toLowerCase();
-        }
-        res = Arrays.toString(words);
-        res = res.replaceAll(" ", ",");
-        res = res.replaceAll(",,",",");
-        res = res.replaceAll("\\[", "");
-        res = res.replaceAll("]", "");
-        this.author = res;
+        this.author = capitalizeString(author).replaceAll("-",",");
     }
 
     public void getBookInfo(final VolleyResponse callback){
@@ -111,30 +100,6 @@ public class Book {
                     setPrice(itemAttr.getJSONObject("ListPrice").getString("FormattedPrice"));
 
 
-                    /*String authors = "";
-                    Object authorJson = new JSONTokener(itemAttr.get("Author").toString()).nextValue();
-                    Log.d("AUTHOR JSON 1", ""+authorJson);
-                    Log.d("AUTHOR JSON 2", ""+ authorJson.getClass());
-                    if(authorJson instanceof String){
-                        Log.d("AUTHOR JSON: ","STRING");
-                        authors = authorJson.toString();
-                    }else if(authorJson instanceof JSONArray){
-                        Log.d("AUTHOR JSON: ","ARRAY");
-                        for(int i=0;i<((JSONArray) authorJson).length();i++) {
-                            Log.d("AUTHOR ARRAY (" + i + "): ", ((JSONArray) authorJson).get(i).toString());
-                            authors += ((JSONArray) authorJson).get(i).toString();
-                            if(i < ((JSONArray) authorJson).length() - 1){
-                                authors += ", ";
-                            }
-                        }
-                    }*/
-
-                    //setAuthor(authors);
-//                    setAuthor("");
-                    setTitle(itemAttr.getString("Title").substring(0, 25));
-
-
-
                     callback.onResponse();
                 }catch(Exception e){
                     Log.e("ERROR MANAGE RESULT 1", e.getMessage());
@@ -143,6 +108,20 @@ public class Book {
 
             }
         });
+    }
+
+    public static String capitalizeString(String string) {
+        char[] chars = string.toLowerCase().toCharArray();
+        boolean found = false;
+        for (int i = 0; i < chars.length; i++) {
+            if (!found && Character.isLetter(chars[i])) {
+                chars[i] = Character.toUpperCase(chars[i]);
+                found = true;
+            } else if (Character.isWhitespace(chars[i]) || chars[i]=='.' || chars[i]=='\'') { // You can add other chars here
+                found = false;
+            }
+        }
+        return String.valueOf(chars);
     }
 }
 

@@ -10,6 +10,7 @@ import org.json.JSONStringer;
 import org.json.JSONTokener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import test.appforbooks.com.SchoolUtils.ResultManager;
@@ -66,7 +67,19 @@ public class Book {
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        String res = author;
+        res = res.toLowerCase();
+        res = res.replaceAll("-"," ");
+        String[] words = res.split("\\s+");
+        for(int i=0;i<words.length;i++){
+            words[i] = words[i].substring(0,1).toUpperCase() + words[i].substring(1).toLowerCase();
+        }
+        res = Arrays.toString(words);
+        res = res.replaceAll(" ", ",");
+        res = res.replaceAll(",,",",");
+        res = res.replaceAll("\\[", "");
+        res = res.replaceAll("]", "");
+        this.author = res;
     }
 
     public void getBookInfo(final VolleyResponse callback){
@@ -97,7 +110,8 @@ public class Book {
 
                     setPrice(itemAttr.getJSONObject("ListPrice").getString("FormattedPrice"));
 
-                    String authors = "";
+
+                    /*String authors = "";
                     Object authorJson = new JSONTokener(itemAttr.get("Author").toString()).nextValue();
                     Log.d("AUTHOR JSON 1", ""+authorJson);
                     Log.d("AUTHOR JSON 2", ""+ authorJson.getClass());
@@ -113,16 +127,9 @@ public class Book {
                                 authors += ", ";
                             }
                         }
+                    }*/
 
-//                         for(int i=0;i<array.length();i++){
-//                            authors += array.get(i).toString();
-//                            if(i < array.length()-1){
-//                                authors += ", ";
-//                            }
-//                        }
-                    }
-
-                    setAuthor(authors);
+                    //setAuthor(authors);
 //                    setAuthor("");
                     setTitle(itemAttr.getString("Title").substring(0, 25));
 

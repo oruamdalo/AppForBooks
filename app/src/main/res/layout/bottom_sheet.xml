@@ -1,55 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottom_sheet"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
-    android:maxHeight="400dp"
-    android:minHeight="400dp"
-    android:gravity="center_horizontal"
-    android:padding="16dp"
-    android:layout_margin="10dp">
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/bottom_sheet_behavior">
 
-    <TextView
-        android:id="@+id/chosen_book_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Titolo libro"
-        android:fontFamily="@font/ps_regular"
-        android:textColor="#181818"
-        android:textSize="25sp"/>
+    <LinearLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:maxHeight="400dp"
+        android:minHeight="400dp"
+        android:padding="16dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
-    <TextView
-        android:id="@+id/chosen_book_manufacturer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Casa editrice"
-        android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/chosen_book_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ps_regular"
+            android:text="Titolo libro"
+            android:textColor="#181818"
+            android:textSize="25sp" />
 
-    <TextView
-        android:id="@+id/chosen_book_price_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Prezzo nuovo"
-        android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/chosen_book_manufacturer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Casa editrice"
+            android:textSize="20sp"/>
 
-    <TextView
-        android:id="@+id/chosen_book_price_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Prezzo usato"
-        android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/chosen_book_price_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prezzo nuovo"
+            android:textSize="20sp"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:src="@drawable/shopping_cart"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/colorSecondary3"
-        app:rippleColor="@color/colorSecondary2"/>
+        <TextView
+            android:id="@+id/chosen_book_price_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prezzo usato"
+            android:textSize="20sp"/>
 
+    </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

@@ -1,6 +1,7 @@
 package test.appforbooks.com.Adapters;
 
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +12,14 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 
+import test.appforbooks.com.Activities.MyBottomSheet;
 import test.appforbooks.com.BookUtils.Book;
 import test.appforbooks.com.R;
-import test.appforbooks.com.SchoolUtils.SchoolManagerInterface;
-import test.appforbooks.com.Utils.PicassoCircleTransformation;
 import test.appforbooks.com.Utils.VolleyResponse;
 
-public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> implements MyBottomSheet.BottomSheetListener{
 
     ArrayList<Book> data;
 
@@ -41,16 +38,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     @NonNull
     @Override
-    public BookAdapter.BookViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public BookAdapter.BookViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int i) {
 
         // create a new view
         View v = (View) LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.book_item_list, viewGroup, false);
 
+
+
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), ((TextView)v.findViewById(R.id.book_title)).getText().toString(),Toast.LENGTH_SHORT).show();
+                MyBottomSheet bottomSheet = new MyBottomSheet();
+                bottomSheet.show(((FragmentActivity)viewGroup.getContext()).getSupportFragmentManager(), "bottomSheet");
             }
         });
 
@@ -78,6 +79,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    @Override
+    public void onButtonClicked(String text) {
     }
 
 

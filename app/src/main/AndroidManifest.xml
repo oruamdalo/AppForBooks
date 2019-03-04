@@ -14,23 +14,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Utils.BookItemViewer"
-            android:label="@string/title_activity_book_item_viewer"
+            android:label="Find my page"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".Activities.IntroSlider" />
-        <!--<activity android:name=".Activities.IntroSlider">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+        <activity android:name=".Activities.IntroSlider">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

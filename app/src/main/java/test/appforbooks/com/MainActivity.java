@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import test.appforbooks.com.Activities.MyBottomSheet;
 import test.appforbooks.com.Adapters.BookAdapter;
 import test.appforbooks.com.BookUtils.Book;
 import test.appforbooks.com.SchoolUtils.ResultManager;
@@ -29,7 +30,7 @@ import test.appforbooks.com.SchoolUtils.SchoolManagerInterface;
 import test.appforbooks.com.Utils.PrefManager;
 import test.appforbooks.com.Utils.VolleyResponse;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyBottomSheet.BottomSheetListener {
 
     RecyclerView bList;
     RecyclerView.Adapter bAdapter;
@@ -88,5 +89,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onButtonClicked(String text) {
 
+    }
 }

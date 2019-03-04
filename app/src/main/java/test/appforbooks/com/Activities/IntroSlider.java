@@ -563,7 +563,6 @@ public class IntroSlider extends AppCompatActivity{
 //        });
 //    }
 
-    //TODO: fix this method
     private void initSlideFour(){
         Log.d("SLIDE: ", "LAST SLIDE");
         Log.d("Name: ", ""+firstName);
@@ -592,7 +591,5 @@ public class IntroSlider extends AppCompatActivity{
     }
 }
 
-//TODO: final intro slide for recap and start main activity
-//TODO: shared pref to save schoolCode, classCode, name, surname etc
 //TODO: fix slide2 spinner data loading
 //TODO: add circle animation while loading slide2 spinner data

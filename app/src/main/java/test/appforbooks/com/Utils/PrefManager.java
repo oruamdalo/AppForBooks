@@ -45,6 +45,11 @@ public class PrefManager {
         editor.commit();
     }
 
+    public void clearPreferences(){
+        editor.clear();
+        editor.commit();
+    }
+
     public String getSchoolCode(){
         return pref.getString(SCHOOL_CODE,null);
     }

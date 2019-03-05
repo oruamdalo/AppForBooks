@@ -1,6 +1,7 @@
 package test.appforbooks.com.BookUtils;
 
 import android.content.Context;
+import android.provider.CallLog;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -70,6 +71,10 @@ public class Book {
         this.title = title;
     }
 
+    public String getIsbn(){
+        return isbn;
+    }
+
     public String getAuthor() {
         return author;
     }
@@ -108,6 +113,7 @@ public class Book {
             @Override
             public void managerResult(String result) {
                 HashMap<String, String> bookInfo = new HashMap<>();
+
                 try{
                     Object json = new JSONTokener(result).nextValue();
                     JSONObject book;
@@ -120,21 +126,31 @@ public class Book {
                         JSONArray array = new JSONArray(result);
                         book = array.getJSONObject(array.length()-1);
                     }
+                    try {
+                        setImageURL(book.getJSONObject("LargeImage").getString("URL"));
+                    }catch(Exception e){
+                        setImageURL("https://via.placeholder.com/150x200");
+                    }
 
+                    try {
+                        setAmazonPage(book.getString("DetailPageURL"));
+                    }catch(Exception e){
+                        setAmazonPage("");
+                    }
 
-
-                    setAmazonPage(book.getString("DetailPageURL"));
-                    setImageURL(book.getJSONObject("LargeImage").getString("URL"));
-
-                    JSONObject itemAttr = book.getJSONObject("ItemAttributes");
-
-                    setPrice(itemAttr.getJSONObject("ListPrice").getString("FormattedPrice"));
+                    try{
+                        JSONObject itemAttr = book.getJSONObject("ItemAttributes");
+                        setPrice(itemAttr.getJSONObject("ListPrice").getString("FormattedPrice"));
+                    }catch(Exception e){
+                        setPrice("Non disponibile");
+                    }
 
 
                     callback.onResponse();
                 }catch(Exception e){
                     Log.e("ERROR MANAGE RESULT 1", e.getMessage());
                     Log.e("ERROR MANAGE RESULT 2", ""+e.getCause());
+                    callback.onError();
                 }
 
             }
@@ -160,16 +176,28 @@ public class Book {
                         book = array.getJSONObject(array.length()-1);
                     }
 
-
                     JSONObject offerSummary = new JSONObject(book.getString("OfferSummary"));
-                    JSONObject price1 = offerSummary.getJSONObject("LowestNewPrice");
-                    JSONObject price2 = offerSummary.getJSONObject("LowestUsedPrice");
-                    setLowestPrice1(price1.getString("FormattedPrice"));
-                    setLowestPrice2(price2.getString("FormattedPrice"));
+                    try {
+                        JSONObject price1 = offerSummary.getJSONObject("LowestNewPrice");
+                        setLowestPrice1(price1.getString("FormattedPrice"));
+
+                    }catch(Exception e){
+                        Log.e("ERROR GETTING PRICE: ",e.getMessage());
+                        setLowestPrice1("Non disponibile");
+                    }
+
+                    try {
+                        JSONObject price2 = offerSummary.getJSONObject("LowestUsedPrice");
+                        setLowestPrice2(price2.getString("FormattedPrice"));
+                    }catch(Exception e){
+                        Log.e("ERROR GETTING PRICE: ",e.getMessage());
+                        setLowestPrice2("Non disponibile");
+                    }
                     callback.onResponse();
                 }catch(Exception e){
                     Log.e("ERROR MANAGE RESULT 1", e.getMessage());
                     Log.e("ERROR MANAGE RESULT 2", ""+e.getCause());
+                    callback.onError();
                 }
 
             }

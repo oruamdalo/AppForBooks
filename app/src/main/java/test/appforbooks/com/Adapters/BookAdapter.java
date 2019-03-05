@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -40,38 +39,55 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     @NonNull
     @Override
-    public BookAdapter.BookViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, final int i) {
+    public BookAdapter.BookViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int i) {
 
         // create a new view
         View v = (View) LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.book_item_list, viewGroup, false);
 
-        v.setOnClickListener(new View.OnClickListener() {
+
+        return new BookViewHolder(v);
+    }
+    //TODO: fix null value for lowset price and add isbn displayer
+    public void onBindViewHolder(final BookViewHolder viewHolder, final int i) {
+        viewHolder.bookView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), ((TextView)v.findViewById(R.id.book_title)).getText().toString(),Toast.LENGTH_SHORT).show();
                 data.get(i).getBookPrices(new VolleyResponse() {
+                    Bundle dataBook = new Bundle();
+                    MyBottomSheet bottomSheet = new MyBottomSheet();
                     @Override
                     public void onResponse() {
-                        MyBottomSheet bottomSheet = new MyBottomSheet();
-                        Bundle dataBook = new Bundle();
-                        dataBook.putString("title", data.get(i).getTitle());
-                        dataBook.putString("price1", data.get(i).getLowestPrice1());
-                        dataBook.putString("price2", data.get(i).getLowestPrice2());
-                        dataBook.putString("imageUrl",data.get(i).getImageURL());
+                        try {
+                            dataBook.putString("title", data.get(i).getTitle());
+                            dataBook.putString("price1", data.get(i).getLowestPrice1());
+                            dataBook.putString("price2", data.get(i).getLowestPrice2());
+                            dataBook.putString("imageUrl", data.get(i).getImageURL());
+                            dataBook.putString("isbn", data.get(i).getIsbn());
+                        }catch(Exception e){
+                            Log.d("ERROR DATA BOOK", e.getMessage());
+
+                        }
                         bottomSheet.setArguments(dataBook);
                         Log.d("Price used: ",""+data.get(i).getLowestPrice1());
-                        bottomSheet.show(((FragmentActivity)viewGroup.getContext()).getSupportFragmentManager(), "bottomSheet");
+                        bottomSheet.show(((FragmentActivity)viewHolder.bookView.getContext()).getSupportFragmentManager(), "bottomSheet");
+                    }
+
+                    @Override
+                    public void onError() {
+                        Log.e("ERRORE BOOK ADAPTER","ERRORE");
+                        dataBook.putString("title", data.get(i).getTitle());
+                        dataBook.putString("price1", "Non disponibile");
+                        dataBook.putString("price2", "Non disponibile");
+                        dataBook.putString("imageUrl", "https://via.placeholder.com/150x200");
+                        dataBook.putString("isbn", data.get(i).getIsbn());
+                        bottomSheet.setArguments(dataBook);
+                        Log.d("Price used: ",""+data.get(i).getLowestPrice1());
+                        bottomSheet.show(((FragmentActivity)viewHolder.bookView.getContext()).getSupportFragmentManager(), "bottomSheet");
                     }
                 });
             }
         });
-
-
-        return new BookViewHolder(v);
-    }
-
-    public void onBindViewHolder(final BookViewHolder viewHolder, final int i) {
         data.get(i).getBookInfo(new VolleyResponse() {
             @Override
             public void onResponse() {
@@ -85,6 +101,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 ImageView thumbnail = viewHolder.bookView.findViewById(R.id.book_thumbnail);
                 Picasso.get().load(data.get(i).getImageURL()).into(thumbnail);
             }
+
+            @Override
+            public void onError() {
+                TextView title = viewHolder.bookView.findViewById(R.id.book_title);
+                TextView author = viewHolder.bookView.findViewById(R.id.book_author);
+                TextView price = viewHolder.bookView.findViewById(R.id.book_price);
+                title.setText(data.get(i).getShortTitle());
+                author.setText(data.get(i).getAuthor());
+                price.setText("Non disponibile");
+
+                ImageView thumbnail = viewHolder.bookView.findViewById(R.id.book_thumbnail);
+                Picasso.get().load("https://via.placeholder.com/150x200").into(thumbnail);
+            }
+
         });
     }
 

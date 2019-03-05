@@ -41,7 +41,7 @@ public class SchoolFinder {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("ERRORE VOLLEY", error.getMessage());
+                resultManager.managerResult("");
             }
         });
         queue.add(stringRequest);

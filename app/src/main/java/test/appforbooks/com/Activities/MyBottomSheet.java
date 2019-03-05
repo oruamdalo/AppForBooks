@@ -47,24 +47,31 @@ public class MyBottomSheet extends BottomSheetDialogFragment{
         String price1 = getArguments().getString("price1");
         String price2 = getArguments().getString("price2");
         String imageUrl = getArguments().getString("imageUrl");
+        String isbn = getArguments().getString("isbn");
 
         ((TextView)v.findViewById(R.id.chosen_book_title)).setText(title);
         ((TextView)v.findViewById(R.id.chosen_book_price_1)).setText("Nuovo: "+price1);
         ((TextView)v.findViewById(R.id.chosen_book_price_2)).setText("Usato: "+price2);
+        ((TextView)v.findViewById(R.id.chosen_book_isbn)).setText("ISBN: "+isbn);
         Picasso.get().load(imageUrl).into(((ImageView)v.findViewById(R.id.sheet_book_thumbnail)));
 
         return v;
 //        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+
+
     @Override
     public void setupDialog(Dialog dialog, int style) {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.bottom_sheet, null);
         dialog.setContentView(v);
 
-        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) v.getParent()).getLayoutParams();
-        CoordinatorLayout.Behavior behavior = params.getBehavior();
-        ((BottomSheetBehavior) behavior).setState(BottomSheetBehavior.STATE_EXPANDED);
+//        BottomSheetBehavior behaviorSheet = BottomSheetBehavior.from(dialog.findViewById(R.id.bottom_sheet));
+//        behaviorSheet.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
+
+//        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) v.getParent()).getLayoutParams();
+//        CoordinatorLayout.Behavior behavior = params.getBehavior();
+//        ((BottomSheetBehavior) behavior).setState(BottomSheetBehavior.STATE_EXPANDED);
     }
 
     public interface BottomSheetListener{

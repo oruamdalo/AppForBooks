@@ -1,6 +1,6 @@
 <resources>
     <!--APP TITLE-->
-    <string name="app_name">FindMyBooks</string>
+    <string name="app_name">Cerca libri</string>
 
     <!--SLIDE TITLES-->
     <string name="slideTitle1">Imposta le \ncredenziali</string>

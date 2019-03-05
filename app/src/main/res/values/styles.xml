@@ -55,4 +55,14 @@
 
     <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
 
+    <style name="MyAlertDialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="buttonBarPositiveButtonStyle">@style/dialogBtnColor</item>
+        <item name="buttonBarNegativeButtonStyle">@style/dialogBtnColor</item>
+    </style>
+
+    <style name="dialogBtnColor" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">#F0B53A</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
 </resources>

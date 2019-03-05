@@ -2,7 +2,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="400dp"
@@ -11,7 +10,6 @@
     android:padding="16dp"
     android:layout_marginTop="30dp"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
     android:layout_margin="10dp"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
@@ -52,7 +50,8 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:text="Prezzo nuovo"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_bold"/>
 
     <TextView
         android:id="@+id/chosen_book_price_2"
@@ -60,10 +59,23 @@
         android:layout_width="wrap_content"
         android:layout_height="31dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
         android:text="Prezzo usato"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_bold"/>
+
+    <TextView
+        android:id="@+id/chosen_book_isbn"
+        android:layout_below="@id/chosen_book_price_2"
+        android:layout_width="wrap_content"
+        android:layout_height="31dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:text="Prezzo usato"
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_bold"/>
 
     <ImageView
         android:id="@+id/sheet_book_thumbnail"
@@ -73,9 +85,3 @@
         android:layout_alignParentEnd="true"
         android:src="@drawable/ic_launcher_background"/>
 </RelativeLayout>
-
-<!--
-
-
-
--->

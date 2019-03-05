@@ -17,7 +17,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import test.appforbooks.com.MainActivity;
 import test.appforbooks.com.R;
@@ -27,35 +31,27 @@ public class MyBottomSheet extends BottomSheetDialogFragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.bottom_sheet_view, container, false);
+        View v = inflater.inflate(R.layout.bottom_sheet, container, false);
 
-        FloatingActionButton fab = v.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        FloatingActionButton fab = v.findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
 
-            }
-        });
         //TODO: set the text with correspondi book values
 
-        //I dont need this. It was just an example
-        /*Button button1 = v.findViewById(R.id.btn_button1);
-        Button button2 = v.findViewById(R.id.button2);
+        String title = getArguments().getString("title");
+        String price1 = getArguments().getString("price1");
+        String price2 = getArguments().getString("price2");
+        String imageUrl = getArguments().getString("imageUrl");
 
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.onButtonClicked("Button 1 clicked");
-                dismiss();
-            }
-        });
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.onButtonClicked("Button 2 clicked");
-                dismiss();
-            }
-        });*/
+        ((TextView)v.findViewById(R.id.chosen_book_title)).setText(title);
+        ((TextView)v.findViewById(R.id.chosen_book_price_1)).setText("Nuovo: "+price1);
+        ((TextView)v.findViewById(R.id.chosen_book_price_2)).setText("Usato: "+price2);
+        Picasso.get().load(imageUrl).into(((ImageView)v.findViewById(R.id.sheet_book_thumbnail)));
 
         return v;
 //        return super.onCreateView(inflater, container, savedInstanceState);

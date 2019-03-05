@@ -20,8 +20,9 @@ import test.appforbooks.com.Utils.VolleyResponse;
 
 public class Book {
     private String title, author, isbn, subject;
-
     private String imageURL, amazonPage, price;
+    private String lowestPrice1, lowestPrice2;
+
     private Context c;
 
     public Book(String isbn, Context c){
@@ -54,13 +55,19 @@ public class Book {
         this.amazonPage = amazonPage;
     }
 
-    public String getTitle() {
+    public String getShortTitle() {
+        int endIndex = (title.length() < 25) ? title.length() : 25;
+        return capitalizeString(title).substring(0, endIndex) + ((endIndex == 25)?"...":"");
+    }
+
+    public String getTitle(){
         return title;
     }
 
     public void setTitle(String title) {
-        int endIndex = (title.length() < 25) ? title.length() : 25;
-        this.title = capitalizeString(title).substring(0, endIndex) + ((endIndex == 25)?"...":"");
+//        int endIndex = (title.length() < 25) ? title.length() : 25;
+//        this.title = capitalizeString(title).substring(0, endIndex) + ((endIndex == 25)?"...":"");
+        this.title = title;
     }
 
     public String getAuthor() {
@@ -77,6 +84,22 @@ public class Book {
 
     public String getSubject(){
         return subject;
+    }
+
+    public String getLowestPrice1() {
+        return lowestPrice1;
+    }
+
+    public void setLowestPrice1(String lowestPrice1) {
+        this.lowestPrice1 = lowestPrice1;
+    }
+
+    public String getLowestPrice2() {
+        return lowestPrice2;
+    }
+
+    public void setLowestPrice2(String lowestPrice2) {
+        this.lowestPrice2 = lowestPrice2;
     }
 
     public void getBookInfo(final VolleyResponse callback){
@@ -117,6 +140,43 @@ public class Book {
             }
         });
     }
+
+    public void getBookPrices(final VolleyResponse callback){
+        String query = "lookup/" + isbn;
+        SchoolFinder.makeRequest(query, c, new ResultManager() {
+            @Override
+            public void managerResult(String result) {
+                HashMap<String, String> bookInfo = new HashMap<>();
+                try{
+                    Object json = new JSONTokener(result).nextValue();
+                    JSONObject book;
+                    if (json instanceof JSONObject) {
+                        //you have an object
+                        Log.d("OUTPUT: ","OBJECT");
+                        book = new JSONObject(result);
+                    }else{
+                        Log.d("OUTPUT: ","ARRAY");
+                        JSONArray array = new JSONArray(result);
+                        book = array.getJSONObject(array.length()-1);
+                    }
+
+
+                    JSONObject offerSummary = new JSONObject(book.getString("OfferSummary"));
+                    JSONObject price1 = offerSummary.getJSONObject("LowestNewPrice");
+                    JSONObject price2 = offerSummary.getJSONObject("LowestUsedPrice");
+                    setLowestPrice1(price1.getString("FormattedPrice"));
+                    setLowestPrice2(price2.getString("FormattedPrice"));
+                    callback.onResponse();
+                }catch(Exception e){
+                    Log.e("ERROR MANAGE RESULT 1", e.getMessage());
+                    Log.e("ERROR MANAGE RESULT 2", ""+e.getCause());
+                }
+
+            }
+        });
+    }
+
+
 
     public static String capitalizeString(String string) {
         char[] chars = string.toLowerCase().toCharArray();

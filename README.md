@@ -5,7 +5,7 @@ Utilizza una API per ottenere i libri utilizzati nell varie classi delle scuole 
 - [X] Slider di introduzione, per l'impostazione delle credenziali e dei dati (to be checked and debugged)
 - [X] Activity per la visualizazione dei libri da comprare
 
-## Progetto abbandonato
+## (Progetto abbandonato)
 - [ ] Activity per la la vendita dei libri
 - [ ] Activity per le opzioni dell'account e delle informazioni personali
 - [ ] Parte back-end per la gestione delle informazioni degli utenti (database mysql)
